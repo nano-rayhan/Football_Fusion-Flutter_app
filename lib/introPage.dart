@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:football_fusion/playerreg.dart';
+import 'package:football_fusion/HostSignin.dart';
+import 'package:football_fusion/SingInPage.dart';
 import 'package:marquee/marquee.dart';
 class Intropage extends StatefulWidget {
   @override
@@ -95,8 +96,8 @@ class _introState extends State<Intropage> {
                   color: Colors.blue,
                   child: FloatingActionButton(onPressed: (){
                     Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => Dialogbox()));
-                }, child: Text("MANAGEMENT"))
+                    MaterialPageRoute(builder: (context) => Hostsignin()));
+                }, child: Text("EVENT COORDINATOR"))
                 ),
                 SizedBox(height: 20,),
                 Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:football_fusion/introPage.dart';
+import 'package:football_fusion/registration.dart';
 import 'package:marquee/marquee.dart';
 
 class Dialogbox extends StatefulWidget{
@@ -12,10 +13,31 @@ class Dialogbox extends StatefulWidget{
 }
 
 class _dialogBox extends State<Dialogbox> {
-  TextEditingController pName = TextEditingController();
   TextEditingController pNumber = TextEditingController();
-  TextEditingController pEmail = TextEditingController();
-  TextEditingController pPassword = TextEditingController();
+  TextEditingController pPassword = TextEditingController(); 
+
+  bool isButtonEnabled = false;
+
+  void checkForm() {
+    setState(() {
+      isButtonEnabled =
+          pNumber.text.isNotEmpty && pPassword.text.isNotEmpty;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    pNumber.addListener(checkForm);
+    pPassword.addListener(checkForm);
+  }
+
+  @override
+  void dispose() {
+    pNumber.dispose();
+    pPassword.dispose();
+    super.dispose();
+  } 
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +45,8 @@ class _dialogBox extends State<Dialogbox> {
         FocusScope.of(context).unfocus(); 
       },
        child: Scaffold(
-      
-      appBar: AppBar(
-        title: SizedBox(
-          height: 30, 
-          child: Marquee(
-            text: "Welcome to the Football Tournament Management App!",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-            scrollAxis: Axis.horizontal, 
-            crossAxisAlignment: CrossAxisAlignment.start,
-            blankSpace: 50.0, 
-            velocity: 50.0, 
-            pauseAfterRound: Duration(seconds: 1), 
-            startPadding: 10.0, 
-          ),
-        ),
+        appBar: AppBar(
+            title: Text("Become a Player!"),
         backgroundColor: Colors.blue,
       ),
       
@@ -50,27 +59,12 @@ class _dialogBox extends State<Dialogbox> {
                 height: 100,
                 child: Column(
                 children: [
-                  Text('SignUp', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  Text('Sign In', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   Text('Welcome to app ')
                 ],               
               ),
             ),
-              
-              TextField(
-                controller: pName,
-              decoration: InputDecoration(
-                hintText: 'Enter your name',
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11)
-                )
-              ),
-            ),
-  
-              SizedBox(height: 20,),
-              
+ 
               TextField( 
                 controller: pNumber,
                 keyboardType: TextInputType.number,
@@ -84,21 +78,7 @@ class _dialogBox extends State<Dialogbox> {
                 )
               ),
             ),
-            SizedBox(height: 20,),
-              
-              TextField(
-                controller: pEmail, 
-                keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                hintText: 'Enter your Email',
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11)
-                )
-              ),
-            ),
+            
             SizedBox(height: 20,),
               
               TextField( 
@@ -128,9 +108,15 @@ class _dialogBox extends State<Dialogbox> {
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Text('SignUp',style: TextStyle(fontSize: 20),),))
-            
-            
+          child: Text('Login',style: TextStyle(fontSize: 20),),)),
+          SizedBox(height: 10,),
+          TextButton(onPressed: (){
+            Navigator.push(context, 
+              MaterialPageRoute(builder: (context) => Registration())
+            );
+          },
+          child: Text('Create a new account', style: TextStyle(decoration: TextDecoration.underline, fontSize: 15),))
+  
           ]         
         
          

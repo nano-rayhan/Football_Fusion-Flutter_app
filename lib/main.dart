@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_fusion/playerProfile.dart';
 import 'package:football_fusion/slpadeshPage.dart';
 
 void main() {
@@ -18,9 +19,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        useMaterial3: true, 
       ),
-      home: splashscreen(),
+      home: Playerprofile(),//splashscreen(),
     );
   }
 }
