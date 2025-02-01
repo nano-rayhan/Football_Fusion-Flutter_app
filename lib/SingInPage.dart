@@ -5,14 +5,14 @@ import 'package:football_fusion/introPage.dart';
 import 'package:football_fusion/registration.dart';
 import 'package:marquee/marquee.dart';
 
-class Dialogbox extends StatefulWidget{
+class PlayerSign extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     return _dialogBox();
   }
 }
 
-class _dialogBox extends State<Dialogbox> {
+class _dialogBox extends State<PlayerSign> {
   TextEditingController pNumber = TextEditingController();
   TextEditingController pPassword = TextEditingController(); 
 

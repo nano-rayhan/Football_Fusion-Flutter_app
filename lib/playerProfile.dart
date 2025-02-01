@@ -9,6 +9,7 @@ class Playerprofile extends StatefulWidget{
 }
 
 class _playerProfile extends State<Playerprofile> {
+  int selectedcontainer = 0;
   var name;
   @override
   Widget build(BuildContext context) {
@@ -85,18 +86,118 @@ class _playerProfile extends State<Playerprofile> {
       body:Center(child: Column(
           
           children: [
-            CircleAvatar(
+            Container(
+              width: double.infinity,
+              color: const Color.fromARGB(255, 131, 125, 164),
+              child: Column(
+                children: [ 
+                  SizedBox(height: 3,),
+                  CircleAvatar(
               radius: 60, // Size of the avatar
               backgroundImage: AssetImage("assets/images/Football.png"), // Load from assets
             ),
             SizedBox(height: 10),
             Text("${name}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text("${context}", style: TextStyle(color: Colors.grey)),
+            Text("${context}", style: TextStyle(color: const Color.fromARGB(255, 10, 10, 10))),
+          ])),
             
-          ],
-        ),
-      )
+            SizedBox(height: 2,
+              
+            ),
+            Container(
+            height: 60,
+            width: double.infinity,
+            color: Color.fromARGB(255, 185, 154, 154),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _buildTextButton("About", 1),
+                  _buildTextButton("My Team", 2),
+                  _buildTextButton("Score", 3),
+                  _buildTextButton("History", 4),
+                  _buildTextButton("Performance", 5),
+                ],
+              ),
+            ),
+          ),
+
+          SizedBox(height: 2),
+
+          // Content Section Based on Selection
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              // padding: EdgeInsets.all(10),
+              color: Colors.grey[200],
+              child: _buildSelectedContainer(),
+            ),
+          ),
+        ],
+      ),
+    ));
+  }
+
+  // Method to Build Text Buttons
+  Widget _buildTextButton(String title, int index) {
+    return  TextButton(
+        onPressed: () {
+          setState(() {
+            selectedcontainer = index;
+          });
+        },
+        child: Text(title, style: TextStyle(fontSize: 20)),
+      
     );
   }
-  
+
+  // Method to Display the Selected Container
+  Widget _buildSelectedContainer() {
+    switch (selectedcontainer) {
+      case 1:
+        return _buildContainer("About", Colors.red,"Goal Kepper", " ");
+      case 2:
+        return _buildContainer("My Team", Colors.white,"","");
+      case 3:
+        return _buildContainer("Score", Colors.blueAccent,"","");
+      case 4:
+        return _buildContainer("History", Colors.green,"","");
+      case 5:
+        return _buildContainer("Performance", Colors.purple,"","");
+      default:
+        return Center(child: Text("Select an option above", style: TextStyle(fontSize: 18)));
+    }
+  }
+
+  // Method to Build Each Container
+  Widget _buildContainer(String title, Color color, String Position, String DOB) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity, // Covers Full Screen Below Buttons
+      //color: color,
+      alignment: Alignment.center,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
+        child: Column(
+          children: [
+            Container(
+              height: 200,
+              color: Colors.red,
+            ),
+             Container(
+              width: double.infinity,
+              height: 200,
+              color: const Color.fromARGB(255, 24, 24, 24),
+            ),
+             Container(
+              height: 200,
+              color: Colors.red,
+            ),
+          ],
+        ),
+      ),
+      )//Text(title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+    );
+  }
 }

@@ -85,7 +85,7 @@ class _introState extends State<Intropage> {
                   color: Colors.blue,
                   child: FloatingActionButton(onPressed: (){
                     Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => Dialogbox()));
+                    MaterialPageRoute(builder: (context) => PlayerSign()));
                   },child: Text("PLAYER"),)
                   
                 ),
@@ -106,7 +106,7 @@ class _introState extends State<Intropage> {
                   color: Colors.blue,
                   child: FloatingActionButton(onPressed: (){
                     Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => Dialogbox()));
+                    MaterialPageRoute(builder: (context) => PlayerSign()));
                 }, child: Text(""))
                 )
               ],

@@ -14,13 +14,16 @@ class _registration extends State<Registration> {
   TextEditingController pEmail = TextEditingController();
   TextEditingController pPassword = TextEditingController();
 
+  final _formkey = GlobalKey<FormState>();
+
   bool isButtonEnabled = false;
 
   void checkForm() {
-    setState(() {
-      isButtonEnabled =
-          pNumber.text.isNotEmpty && pPassword.text.isNotEmpty && pName.text.isNotEmpty;
-    });
+    if (_formkey.currentState != null) { // ✅ Check if form is not null
+      setState(() {
+        isButtonEnabled = _formkey.currentState!.validate();
+      });
+    }
   }
 
   @override
@@ -66,7 +69,7 @@ class _registration extends State<Registration> {
               ),
             ),
               
-              TextField(
+              TextFormField(
                 controller: pName,
               decoration: InputDecoration(
                 hintText: 'Enter your name',
@@ -77,11 +80,19 @@ class _registration extends State<Registration> {
                   borderRadius: BorderRadius.circular(11)
                 )
               ),
+              validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Name is required";
+                      }
+                      return null;
+                    },
+              
             ),
+            
   
               SizedBox(height: 20,),
               
-              TextField( 
+              TextFormField( 
                 controller: pNumber,
                 keyboardType: TextInputType.number,
               decoration: InputDecoration(
@@ -93,10 +104,18 @@ class _registration extends State<Registration> {
                   borderRadius: BorderRadius.circular(11)
                 )
               ),
+              validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Phone number is required";
+                      } else if (value.length < 10) {
+                        return "Enter a valid phone number";
+                      }
+                      return null;
+                    },
             ),
             SizedBox(height: 20,),
               
-              TextField(
+              TextFormField(
                 controller: pEmail, 
                 keyboardType: TextInputType.text,
               decoration: InputDecoration(
@@ -108,10 +127,19 @@ class _registration extends State<Registration> {
                   borderRadius: BorderRadius.circular(11)
                 )
               ),
+              validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Email is required";
+                      } else if (!RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
+                          .hasMatch(value)) {
+                        return "Enter a valid email";
+                      }
+                      return null;
+                    },
             ),
             SizedBox(height: 20,),
               
-              TextField( 
+              TextFormField( 
                     controller: pPassword,
                     obscureText: true,
                     obscuringCharacter: '*',
@@ -125,6 +153,14 @@ class _registration extends State<Registration> {
                     borderRadius: BorderRadius.circular(11)
                 )
               ),
+              validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Password is required";
+                      } else if (value.length < 6) {
+                        return "Password must be at least 6 characters";
+                      }
+                      return null;
+                    },
             ),
             SizedBox(
               height: 20,
@@ -132,23 +168,36 @@ class _registration extends State<Registration> {
             SizedBox(
               width: 200,
               height: 50,
-            child:  FloatingActionButton(onPressed: isButtonEnabled?(){
-             Navigator.push(context, 
-             MaterialPageRoute(builder: (context) => Playerprofile()));
-  }:null,
-          backgroundColor: Colors.blue,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Text('SignUp',style: TextStyle(fontSize: 20),),))
-            
-            
-          ]         
-        
-         
-      ),
-    ),
-  ),
-
-    ));
+            child:  FloatingActionButton(
+                      onPressed: isButtonEnabled
+                          ? () {
+                              if (_formkey.currentState!.validate()) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Playerprofile()),
+                                );
+                              }
+                            }
+                          : null,
+                      backgroundColor: isButtonEnabled
+                          ? Colors.blue
+                          : Colors.grey, // ✅ Disable button when invalid
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Text(
+                        'SignUp',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      
+    );
   }
 }
