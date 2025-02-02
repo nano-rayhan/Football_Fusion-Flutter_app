@@ -10,10 +10,12 @@ class Playerprofile extends StatefulWidget{
 }
 
 class _playerProfile extends State<Playerprofile> {
+  
   int selectedcontainer = 0;
   var name;
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -128,6 +130,7 @@ class _playerProfile extends State<Playerprofile> {
           // Content Section Based on Selection
           Expanded(
             child: Container(
+              height: double.infinity,
               width: double.infinity,
               // padding: EdgeInsets.all(10),
               color: Colors.grey[200],
@@ -196,26 +199,33 @@ class _playerProfile extends State<Playerprofile> {
     
   }
 }
+
+
 Widget My_team() {
-    return Container(
-      width: double.infinity,
-      height: double.infinity, // Covers Full Screen Below Buttons
-      //color: color,
-      //alignment: Alignment.center,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-        child: Column(
-          children: [
-            Text("Team Name",style: TextStyle(fontSize: 30, color: const Color.fromARGB(255, 86, 176, 176)),),
-            ListView(
-              children: [
-                
-              ],
-            )
-          ],
-        ),
+  var arrName = ['   ', '   ']; // Sample team members
+  return  Container(
+    width: double.infinity,
+    height: double.infinity,
+    color: const Color.fromARGB(255, 190, 185, 185),
+    child: Center(
+      child: ListView.builder(
+        itemCount: arrName.length, // The number of items to be displayed
+        itemBuilder: (context, index) {
+          return Card(
+            elevation: 20,
+            child: Container(
+              height: 50,
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  '${arrName[index]}', 
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+            ),
+          );
+        },
       ),
-      )//Text(title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-    );
+    ),
+  );
 }
