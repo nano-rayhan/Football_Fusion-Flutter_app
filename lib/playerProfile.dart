@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_fusion/SingInPage.dart';
 import 'package:football_fusion/introPage.dart';
 
 class Playerprofile extends StatefulWidget{
@@ -76,7 +77,7 @@ class _playerProfile extends State<Playerprofile> {
               title: Text("Logout"),
               onTap: () {
                 Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Intropage()));
+                MaterialPageRoute(builder: (context) => PlayerSign()));
               },
             ),
           ],
@@ -157,7 +158,7 @@ class _playerProfile extends State<Playerprofile> {
       case 1:
         return _buildContainer("About", Colors.red,"Goal Kepper", " ");
       case 2:
-        return _buildContainer("My Team", Colors.white,"","");
+        return My_team();
       case 3:
         return _buildContainer("Score", Colors.blueAccent,"","");
       case 4:
@@ -170,34 +171,51 @@ class _playerProfile extends State<Playerprofile> {
   }
 
   // Method to Build Each Container
-  Widget _buildContainer(String title, Color color, String Position, String DOB) {
+  Widget _buildContainer(String title, Color color, String teamname, String DOB) {
     return Container(
       width: double.infinity,
       height: double.infinity, // Covers Full Screen Below Buttons
       //color: color,
-      alignment: Alignment.center,
+      //alignment: Alignment.center,
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
         child: Column(
           children: [
-            Container(
-              height: 200,
-              color: Colors.red,
-            ),
-             Container(
-              width: double.infinity,
-              height: 200,
-              color: const Color.fromARGB(255, 24, 24, 24),
-            ),
-             Container(
-              height: 200,
-              color: Colors.red,
-            ),
+            Text(teamname,style: TextStyle(fontSize: 30, color: const Color.fromARGB(255, 86, 176, 176)),),
+            ListView(
+              children: [
+
+              ],
+            )
           ],
         ),
       ),
       )//Text(title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
     );
+    
   }
+}
+Widget My_team() {
+    return Container(
+      width: double.infinity,
+      height: double.infinity, // Covers Full Screen Below Buttons
+      //color: color,
+      //alignment: Alignment.center,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
+        child: Column(
+          children: [
+            Text("Team Name",style: TextStyle(fontSize: 30, color: const Color.fromARGB(255, 86, 176, 176)),),
+            ListView(
+              children: [
+                
+              ],
+            )
+          ],
+        ),
+      ),
+      )//Text(title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+    );
 }

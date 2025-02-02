@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:football_fusion/SingInPage.dart';
 import 'package:football_fusion/introPage.dart';
 import 'package:football_fusion/main.dart';
 
@@ -18,7 +19,7 @@ class _SplashscreenState extends State<splashscreen>{
     super.initState();
     Timer(Duration(seconds: 5), (){
       Navigator.pushReplacement(context, 
-      MaterialPageRoute(builder: (context) => Intropage()));
+      MaterialPageRoute(builder: (context) => PlayerSign()));
     });
   }
   @override
