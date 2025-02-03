@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:football_fusion/playerProfile.dart';
 import 'package:football_fusion/registration.dart';
+import 'package:football_fusion/slpadeshPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PlayerSign extends StatefulWidget {
   @override
@@ -105,17 +107,22 @@ class _PlayerSignState extends State<PlayerSign> {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          showErrors = true; 
-                        });
+                      onPressed: ()async {
 
-                        if (isButtonEnabled) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Playerprofile()),
-                          );
-                        }
+                        var shredPref = await SharedPreferences.getInstance();
+                        shredPref.setBool(SplashscreenState.KEYLOGIN , true );
+                        Navigator.pushReplacement(context, 
+                        MaterialPageRoute(builder: (context) => PlayerProfile()));
+                        // setState(() {
+                        //   showErrors = true; 
+                        // });
+
+                        // if (isButtonEnabled) {
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (context) => PlayerProfile()),
+                        //   );}
+                        
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isButtonEnabled ? Colors.blueAccent : Colors.grey, 

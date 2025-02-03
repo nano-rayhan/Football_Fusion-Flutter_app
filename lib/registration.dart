@@ -51,7 +51,7 @@ class _RegistrationState extends State<Registration> {
     if (_formKey.currentState!.validate()) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Playerprofile()),
+        MaterialPageRoute(builder: (context) => PlayerProfile()),
       );
     }
   }

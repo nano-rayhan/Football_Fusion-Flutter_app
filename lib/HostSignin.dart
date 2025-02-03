@@ -118,7 +118,7 @@ class _hostsignin extends State<Hostsignin> {
             child:  FloatingActionButton(onPressed: 
             isButtonEnabled ?(){
              Navigator.push(context, 
-             MaterialPageRoute(builder: (context) => Playerprofile() ));
+             MaterialPageRoute(builder: (context) => PlayerProfile() ));
             }:null,
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
