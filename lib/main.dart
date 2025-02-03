@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true, 
       ),
-      home: splashscreen(),
+      home: Playerprofile(),
     );
   }
 }
@@ -60,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Image.asset('assets/images/Football.png',
               width: 300,
               height: 300,
+              
             ) 
           
         ),

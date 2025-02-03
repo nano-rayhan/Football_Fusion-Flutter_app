@@ -30,7 +30,7 @@ class _SplashscreenState extends State<splashscreen>{
           Container(
         height: double.infinity,
         width: double.infinity,
-        child: Image.asset('assets/images/Football.png',
+        child:  Image.asset('assets/images/font1.png',
         height: double.infinity,
         width: double.infinity,
         fit: BoxFit.cover,),

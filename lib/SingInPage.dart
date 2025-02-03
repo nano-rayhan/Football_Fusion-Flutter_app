@@ -56,7 +56,8 @@ class _PlayerSignState extends State<PlayerSign> {
           title: Text("Become a Player!"),
           backgroundColor: Colors.blueAccent,
         ),
-        body: SingleChildScrollView(
+        body:  
+        SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(30),
             child: Column(

@@ -18,20 +18,20 @@ class _playerProfile extends State<Playerprofile> {
     
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.black,
         title: SizedBox(
-          child: Text("My Profile"), ),
+          child: Text("My Profile", style: TextStyle(color: Colors.white),), ),
           actions: [
            IconButton(
-      icon: Icon(Icons.search), // Search icon
+      icon: Icon(Icons.search, color: Colors.white,), // Search icon
       onPressed: () {
-        print("Search clicked!");
+        
       },
     ), 
     IconButton(
-      icon: Icon(Icons.notifications), // Notification icon
+      icon: Icon(Icons.notifications,color: Colors.white,), // Notification icon
       onPressed: () {
-        print("Notifications clicked!");
+        
       },
     ),
     
@@ -89,9 +89,10 @@ class _playerProfile extends State<Playerprofile> {
       body:Center(child: Column(
           
           children: [
+            SizedBox(height: 20,),
             Container(
               width: double.infinity,
-              color: const Color.fromARGB(255, 131, 125, 164),
+              
               child: Column(
                 children: [ 
                   SizedBox(height: 3,),
@@ -100,17 +101,17 @@ class _playerProfile extends State<Playerprofile> {
               backgroundImage: AssetImage("assets/images/Football.png"), // Load from assets
             ),
             SizedBox(height: 10),
-            Text("${name}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text("${context}", style: TextStyle(color: const Color.fromARGB(255, 10, 10, 10))),
+            Text("Md Rayhan", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text("rayhan@gmail.com", style: TextStyle(color: const Color.fromARGB(255, 10, 10, 10))),
           ])),
             
-            SizedBox(height: 2,
+            SizedBox(height: 20,
               
             ),
             Container(
             height: 60,
             width: double.infinity,
-            color: Color.fromARGB(255, 185, 154, 154),
+            color: Colors.grey[200],
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -126,14 +127,16 @@ class _playerProfile extends State<Playerprofile> {
           ),
 
           SizedBox(height: 2),
+          
 
           // Content Section Based on Selection
           Expanded(
-            child: Container(
+            
+              child:  Container(
               height: double.infinity,
               width: double.infinity,
               // padding: EdgeInsets.all(10),
-              color: Colors.grey[200],
+              
               child: _buildSelectedContainer(),
             ),
           ),
@@ -175,7 +178,9 @@ class _playerProfile extends State<Playerprofile> {
 
   // Method to Build Each Container
   Widget _buildContainer(String title, Color color, String teamname, String DOB) {
-    return Container(
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child:  Container(
       width: double.infinity,
       height: double.infinity, // Covers Full Screen Below Buttons
       //color: color,
@@ -193,7 +198,7 @@ class _playerProfile extends State<Playerprofile> {
             )
           ],
         ),
-      ),
+      ),)
       )//Text(title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
     );
     
@@ -202,29 +207,40 @@ class _playerProfile extends State<Playerprofile> {
 
 
 Widget My_team() {
-  var arrName = ['   ', '   ']; // Sample team members
-  return  Container(
-    width: double.infinity,
-    height: double.infinity,
-    color: const Color.fromARGB(255, 190, 185, 185),
-    child: Center(
-      child: ListView.builder(
-        itemCount: arrName.length, // The number of items to be displayed
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 20,
-            child: Container(
-              height: 50,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  '${arrName[index]}', 
-                  style: TextStyle(fontSize: 30),
-                ),
-              ),
-            ),
-          );
-        },
+  var arrName = ['Rahim', 'Karim', 'Jabbar', 'Sajid', 'Tamim']; // Sample team members
+  return Scaffold(
+    body: Container(
+      width: double.infinity,
+      height: double.infinity,
+      color: Colors.grey[200], 
+
+      child: Column(
+        children: [
+          SizedBox(height: 20),
+          Text(
+            "My Team",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+
+          
+
+          
+          Positioned(
+  bottom: 30,  
+  right: 30,  
+  child: ElevatedButton(
+    onPressed: () {},
+    style: ElevatedButton.styleFrom(
+      shape: CircleBorder(),  
+      padding: EdgeInsets.all(20), 
+      backgroundColor: Colors.red,
+    ),
+    child: Icon(Icons.add, size: 30, color: Colors.white),
+  ),
+),
+
+        ],
       ),
     ),
   );
