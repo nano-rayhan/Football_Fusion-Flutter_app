@@ -74,45 +74,41 @@ class _PlayerProfileState extends State<PlayerProfile> {
         ),
       ),
 
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            CircleAvatar(
-              radius: 60,
-              backgroundImage: AssetImage("assets/images/Football.png"),
-            ),
-            SizedBox(height: 10),
-            Text("Md Rayhan", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text("rayhan@gmail.com"),
-
-            SizedBox(height: 20),
-            Container(
-              height: 60,
-              width: double.infinity,
-              color: Colors.grey[200],
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    _buildTextButton("About", 1),
-                    _buildTextButton("My Team", 2),
-                    _buildTextButton("Score", 3),
-                    _buildTextButton("History", 4),
-                    _buildTextButton("Performance", 5),
-                  ],
-                ),
+      body: Column(
+        children: [
+          SizedBox(height: 20),
+          CircleAvatar(
+            radius: 60,
+            backgroundImage: AssetImage("assets/images/Football.png"),
+          ),
+          SizedBox(height: 10),
+          Text("Md Rayhan", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Text("rayhan@gmail.com"),
+          SizedBox(height: 20),
+          
+          Container(
+            height: 60,
+            width: double.infinity,
+            color: Colors.grey[200],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _buildTextButton("About", 1),
+                  _buildTextButton("My Team", 2),
+                  _buildTextButton("Score", 3),
+                  _buildTextButton("History", 4),
+                  _buildTextButton("Performance", 5),
+                ],
               ),
             ),
+          ),
 
-            SizedBox(height: 2),
-
-            // ✅ Content Section Based on Selection
-            Expanded(
-              child: _buildSelectedContainer(),
-            ),
-          ],
-        ),
+          SizedBox(height: 2),
+          Expanded(
+            child: _buildSelectedContainer(),
+          ),
+        ],
       ),
     );
   }
@@ -131,33 +127,26 @@ class _PlayerProfileState extends State<PlayerProfile> {
   Widget _buildSelectedContainer() {
     switch (selectedContainer) {
       case 1:
-        return _buildContainer("About", Colors.red, "Goal Keeper", " ");
+        return _buildContainer("About", "Position: Goal Keeper\nExperience: 5 Years", Colors.red);
       case 2:
         return MyTeam();
       case 3:
-        return _buildContainer("Score", Colors.blueAccent, "", "");
+        return _buildContainer("Score", "Matches Played: 20\nGoals Scored: 15", Colors.blueAccent);
       case 4:
-        return _buildContainer("History", Colors.green, "", "");
+        return _buildContainer("History", "Last Match: Won 2-1 vs Rival Team", Colors.green);
       case 5:
-        return _buildContainer("Performance", Colors.purple, "", "");
+        return _buildContainer("Performance", "Win Rate: 80%\nTop Scorer: Yes", Colors.purple);
       default:
         return Center(child: Text("Select an option above", style: TextStyle(fontSize: 18)));
     }
   }
 
-  Widget _buildContainer(String title, Color color, String teamName, String dob) {
+  Widget _buildContainer(String title, String details, Color color) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Text(teamName, style: TextStyle(fontSize: 30, color: Colors.teal)),
-          ListView(
-            shrinkWrap: true,
-            children: [],
-          ),
-        ],
-      ),
+      color: color.withOpacity(0.1),
+      child: Text(details, style: TextStyle(fontSize: 18)),
     );
   }
 }
@@ -186,20 +175,13 @@ class _MyTeamState extends State<MyTeam> {
               itemCount: arrName.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Row(
-                    children: [
-                      SizedBox(width: 10),
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/font1.png'),
-                      ),
-                      SizedBox(width: 10),
-                      Text(arrName[index], style: TextStyle(fontSize: 18)),
-                    ],
-                  ),
+                  title: Text(arrName[index], style: TextStyle(fontSize: 18)),
                   trailing: IconButton(
                     icon: Icon(Icons.delete, color: Colors.red),
                     onPressed: () {
-                      _deleteItem(index); // ✅ ফাংশন ঠিকভাবে কল করা হয়েছে
+                      setState(() {
+                        arrName.removeAt(index);
+                      });
                     },
                   ),
                 );
@@ -209,58 +191,8 @@ class _MyTeamState extends State<MyTeam> {
               },
             ),
           ),
-
-          FloatingActionButton(
-            onPressed: () {
-              _showAddDialog(); // ✅ এখন Add Button কাজ করবে
-            },
-            backgroundColor: Colors.red,
-            child: Icon(Icons.add, size: 30, color: Colors.white),
-          ),
         ],
       ),
-    );
-  }
-
-  void _deleteItem(int index) {
-    setState(() {
-      arrName.removeAt(index); // ✅ লিস্ট থেকে নাম রিমুভ করা হচ্ছে
-    });
-  }
-
-  void _showAddDialog() {
-    TextEditingController _textController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Add Team Member"),
-          content: TextField(
-            controller: _textController,
-            decoration: InputDecoration(hintText: "Enter Name"),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // Cancel করলে ডায়লগ বন্ধ হবে
-              },
-              child: Text("Cancel"),
-            ),
-            TextButton(
-              onPressed: () {
-                if (_textController.text.isNotEmpty) {
-                  setState(() {
-                    arrName.add(_textController.text); // ✅ List এ নাম Add হচ্ছে
-                  });
-                  Navigator.pop(context); // Dialog বন্ধ
-                }
-              },
-              child: Text("Add"),
-            ),
-          ],
-        );
-      },
     );
   }
 }

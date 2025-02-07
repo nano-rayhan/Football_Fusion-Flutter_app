@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:football_fusion/SingInPage.dart';
+import 'package:football_fusion/management.dart';
+import 'package:football_fusion/playerProfile.dart';
 import 'package:football_fusion/slpadeshPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: splashscreen(),
+      home: PlayerProfile(),
     );
   }
 }
